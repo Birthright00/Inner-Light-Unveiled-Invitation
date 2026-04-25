@@ -736,192 +736,192 @@
   }
 
   /* Mobile (600px and below) */
-  @media (max-width: 600px){
-    .stage{ padding: 24px 12px 48px; }
+  @media screen and (max-width: 600px){
+    .stage{ padding: 24px 12px 48px !important; }
 
     /* Card must expand to fit content on mobile */
-    .card{ aspect-ratio: auto; min-height: auto; }
+    .card{ aspect-ratio: auto !important; min-height: auto !important; }
     .face{
-      position: relative;
-      overflow: visible;
+      position: relative !important;
+      overflow: visible !important;
     }
     .face.back{
-      position: absolute;
+      position: absolute !important;
       inset: 0;
-      overflow: auto;
+      overflow: auto !important;
     }
-    .card.flipped .face.front{ display: none; }
+    .card.flipped .face.front{ display: none !important; }
     .card.flipped .face.back{
-      position: relative;
-      opacity: 1;
+      position: relative !important;
+      opacity: 1 !important;
     }
-    .card:not(.flipped) .face.back{ display: none; }
+    .card:not(.flipped) .face.back{ display: none !important; }
 
-    /* Front face adjustments */
-    .front{ grid-template-columns: 32px 1fr; }
-    .rail{ padding: 20px 0; }
-    .rail span{ font-size: 9px; letter-spacing: 0.4em; }
+    /* Front face adjustments - hide rail on mobile */
+    .front{ grid-template-columns: 1fr !important; display: block !important; }
+    .rail{ display: none !important; }
 
     .head{
-      padding: 14px 14px 10px;
-      grid-template-columns: 1fr;
-      gap: 8px;
+      padding: 16px 16px 12px !important;
+      grid-template-columns: 1fr !important;
+      gap: 4px !important;
+      display: block !important;
     }
-    .head .brand{ font-size: 12px; }
+    .head .brand{ font-size: 13px !important; margin-bottom: 8px !important; }
     .head .tag{
-      text-align: left;
-      padding-top: 6px;
-      font-size: 9px;
+      text-align: left !important;
+      padding-top: 0 !important;
+      font-size: 10px !important;
+      display: none !important;
     }
-    .head .tag::before{ display: none; }
+    .head .tag::before{ display: none !important; }
     .head .addr{
-      text-align: left;
-      padding-top: 6px;
-      font-size: 9px;
+      text-align: left !important;
+      padding-top: 4px !important;
+      font-size: 10px !important;
     }
-    .head .addr::before{ display: none; }
+    .head .addr::before{ display: none !important; }
 
     .body{
-      padding: 10px 14px 14px;
+      padding: 12px 16px 16px !important;
       flex: 1 1 auto;
-      overflow: visible;
+      overflow: visible !important;
     }
-    .salutation{ font-size: 16px; margin: 4px 0 10px; }
-    .salutation .name{ font-size: 1.4em; }
+    .salutation{ font-size: 15px !important; margin: 0 0 8px !important; }
+    .salutation .name{ font-size: 1.3em !important; }
 
-    .display{ font-size: clamp(32px, 10vw, 50px); margin: 2px 0; }
-    .display .small{ font-size: 0.16em; letter-spacing: 0.4em; margin-bottom: 8px; }
+    .display{ font-size: clamp(28px, 9vw, 42px) !important; margin: 0 0 8px !important; }
+    .display .small{ font-size: 0.18em !important; letter-spacing: 0.35em !important; margin-bottom: 6px !important; }
 
-    .letter{ font-size: 12.5px; margin-top: 12px; max-width: 100%; }
+    .letter{ font-size: 13px !important; margin-top: 10px !important; max-width: 100% !important; line-height: 1.5 !important; }
 
     .meta{
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      padding-top: 12px;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 12px 8px !important;
+      padding-top: 14px !important;
+      margin-top: 12px !important;
     }
-    .meta .cell:last-child{ grid-column: span 2; }
-    .meta .cell .k{ font-size: 8px; }
-    .meta .cell .v{ font-size: 14px; }
-    .meta .cell .v small{ font-size: 10px; margin-top: 4px; }
+    .meta .cell:last-child{ grid-column: span 2 !important; }
+    .meta .cell .k{ font-size: 8px !important; }
+    .meta .cell .v{ font-size: 15px !important; }
+    .meta .cell .v small{ font-size: 10px !important; margin-top: 3px !important; }
 
     .foot{
-      padding: 10px 14px 12px;
-      flex-direction: column;
-      gap: 10px;
-      align-items: flex-start;
+      padding: 12px 16px 16px !important;
+      flex-direction: column !important;
+      gap: 10px !important;
+      align-items: stretch !important;
     }
-    .foot span{ font-size: 8px; }
+    .foot span{ font-size: 8px !important; }
     .foot .flip{
-      width: 100%;
-      text-align: center;
-      padding: 12px 14px;
-      font-size: 9px;
+      width: 100% !important;
+      text-align: center !important;
+      padding: 14px !important;
+      font-size: 10px !important;
     }
 
-    .seal{ width: 42px; height: 42px; right: 10px; bottom: 50px; }
-    .seal .star{ font-size: 7px; top: 6px; }
-    .seal .il{ font-size: 6px; letter-spacing: 0.25em; }
+    .seal{ display: none !important; }
 
     /* Back face adjustments */
     .back-grid{
-      padding: 18px 16px 20px;
-      height: auto;
-      min-height: 100%;
-      grid-template-rows: auto auto auto auto;
+      padding: 16px !important;
+      height: auto !important;
+      min-height: auto !important;
+      grid-template-rows: auto auto auto auto !important;
     }
-    .back-eye{ font-size: 7px; gap: 8px; }
-    .back-eye .star{ font-size: 12px; }
+    .back-eye{ font-size: 7px !important; gap: 6px !important; }
+    .back-eye .star{ font-size: 10px !important; }
 
     .back-title{
-      margin-top: 10px;
-      padding-bottom: 10px;
-      grid-template-columns: 1fr;
-      gap: 8px;
+      margin-top: 8px !important;
+      padding-bottom: 8px !important;
+      grid-template-columns: 1fr !important;
+      gap: 6px !important;
     }
-    .back-title h2{ font-size: clamp(22px, 7vw, 32px); }
-    .back-title h2 em{ font-size: 0.38em; margin-bottom: 4px; }
-    .back-title .stamp{ text-align: left; margin-top: 4px; }
+    .back-title h2{ font-size: clamp(20px, 6vw, 28px) !important; }
+    .back-title h2 em{ font-size: 0.4em !important; margin-bottom: 2px !important; }
+    .back-title .stamp{ text-align: left !important; margin-top: 4px !important; font-size: 8px !important; }
+    .back-title .stamp b{ font-size: 11px !important; }
 
     .back-body{
-      grid-template-columns: 1fr;
-      gap: 16px;
-      padding-top: 12px;
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+      padding-top: 10px !important;
     }
-    .back-divider{ display: none; }
+    .back-divider{ display: none !important; }
 
-    .panel-h{ font-size: 8px; margin-bottom: 8px; }
+    .panel-h{ font-size: 8px !important; margin-bottom: 6px !important; }
 
     .programme li{
-      grid-template-columns: 55px 8px 1fr;
-      gap: 6px;
-      padding: 7px 0;
+      grid-template-columns: 50px 6px 1fr !important;
+      gap: 4px !important;
+      padding: 6px 0 !important;
     }
-    .programme .time{ font-size: 13px; }
-    .programme .time small{ font-size: 7px; }
-    .programme .dot{ width: 5px; height: 5px; }
-    .programme .what{ font-size: 12.5px; }
-    .programme .what small{ font-size: 7px; }
+    .programme .time{ font-size: 12px !important; }
+    .programme .time small{ font-size: 7px !important; }
+    .programme .dot{ width: 4px !important; height: 4px !important; }
+    .programme .what{ font-size: 12px !important; }
+    .programme .what small{ font-size: 7px !important; }
 
-    .info{ gap: 12px; }
-    .info .v{ font-size: 14px; }
-    .info .sub{ font-size: 11px; }
+    .info{ gap: 10px !important; }
+    .info .v{ font-size: 13px !important; }
+    .info .sub{ font-size: 11px !important; }
 
-    .rsvp-ticket{ padding: 10px 12px; }
-    .rsvp-ticket .rh{ font-size: 7px; }
-    .rsvp-ticket .rby{ font-size: 11px; }
-    .rsvp-ticket .line{ font-size: 11px; }
+    .rsvp-ticket{ padding: 10px !important; }
+    .rsvp-ticket .rh{ font-size: 7px !important; }
+    .rsvp-ticket .rby{ font-size: 10px !important; }
+    .rsvp-ticket .line{ font-size: 10px !important; }
 
     .back-foot{
-      grid-template-columns: 1fr;
-      gap: 8px;
-      text-align: center;
-      padding-top: 10px;
-      margin-top: 10px;
-      font-size: 8px;
+      grid-template-columns: 1fr !important;
+      gap: 6px !important;
+      text-align: center !important;
+      padding-top: 10px !important;
+      margin-top: 10px !important;
+      font-size: 8px !important;
     }
-    .back-foot .l, .back-foot .r{ text-align: center; }
-    .back-foot .c{ font-size: 11px; }
-    .back-foot .flip-link{ font-size: 8px; }
+    .back-foot .l, .back-foot .r{ text-align: center !important; }
+    .back-foot .c{ font-size: 10px !important; }
+    .back-foot .flip-link{ font-size: 8px !important; padding: 8px 0 !important; }
 
     /* Envelope adjustments */
-    .envelope .env{ width: min(320px, 90vw); }
-    .envelope .seal-wax{ width: 48px; height: 48px; font-size: 10px; }
-    .envelope .stamp-text{ font-size: 8px; bottom: 12%; }
-    .envelope .stamp-text .big{ font-size: 18px; }
-    .envelope .open-cta{ font-size: 8px; letter-spacing: 0.25em; bottom: -44px; }
+    .envelope .env{ width: min(300px, 85vw) !important; }
+    .envelope .seal-wax{ width: 44px !important; height: 44px !important; font-size: 9px !important; }
+    .envelope .stamp-text{ font-size: 8px !important; bottom: 12% !important; }
+    .envelope .stamp-text .big{ font-size: 16px !important; }
+    .envelope .open-cta{ font-size: 8px !important; letter-spacing: 0.2em !important; bottom: -40px !important; }
   }
 
   /* Extra small mobile (400px and below) */
-  @media (max-width: 400px){
-    .stage{ padding: 16px 8px 32px; }
+  @media screen and (max-width: 400px){
+    .stage{ padding: 12px 8px 24px !important; }
 
-    .front{ grid-template-columns: 24px 1fr; }
-    .rail span{ font-size: 8px; letter-spacing: 0.3em; }
+    .head{ padding: 12px 12px 8px !important; }
+    .head .brand{ font-size: 12px !important; }
+    .head .addr{ font-size: 9px !important; }
 
-    .head{ padding: 10px 10px 8px; }
-    .body{ padding: 8px 10px 12px; }
-    .foot{ padding: 8px 10px 10px; }
+    .body{ padding: 8px 12px 12px !important; }
+    .salutation{ font-size: 14px !important; }
+    .foot{ padding: 10px 12px 12px !important; }
 
-    .display{ font-size: clamp(26px, 11vw, 40px); }
-    .display .small{ font-size: 0.14em; letter-spacing: 0.3em; }
+    .display{ font-size: clamp(24px, 10vw, 36px) !important; }
+    .display .small{ font-size: 0.16em !important; letter-spacing: 0.3em !important; }
 
-    .letter{ font-size: 11.5px; line-height: 1.5; }
+    .letter{ font-size: 12px !important; }
 
-    .meta{ gap: 6px; }
-    .meta .cell .v{ font-size: 13px; }
+    .meta{ gap: 10px 6px !important; }
+    .meta .cell .v{ font-size: 14px !important; }
 
-    .seal{ display: none; }
+    .back-grid{ padding: 12px !important; }
+    .back-title h2{ font-size: 18px !important; }
 
-    .back-grid{ padding: 12px 10px 16px; }
-    .back-title h2{ font-size: 20px; }
+    .programme li{ grid-template-columns: 45px 5px 1fr !important; }
+    .programme .time{ font-size: 11px !important; }
+    .programme .what{ font-size: 11px !important; }
 
-    .programme li{ grid-template-columns: 48px 6px 1fr; gap: 4px; }
-    .programme .time{ font-size: 12px; }
-    .programme .what{ font-size: 11.5px; }
-
-    .envelope .env{ width: min(280px, 92vw); }
-    .envelope .seal-wax{ width: 42px; height: 42px; font-size: 9px; }
-    .envelope .stamp-text .big{ font-size: 16px; }
+    .envelope .env{ width: min(260px, 90vw) !important; }
+    .envelope .seal-wax{ width: 40px !important; height: 40px !important; font-size: 8px !important; }
+    .envelope .stamp-text .big{ font-size: 14px !important; }
   }
 
   /* Landscape mobile orientation */
