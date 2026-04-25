@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Inner Light Unveiled · Invitation</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Archivo:wght@400;500;600;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper: #F2EEE6;
+    --paper-edge: #E6E0D3;
+    --ink: #0A0A0A;
+    --ink-soft: #2B2926;
+    --rule: rgba(10,10,10,0.45);
+    --hairline: rgba(10,10,10,0.18);
+    --shadow: 0 30px 60px -25px rgba(20,18,14,0.45), 0 12px 24px -12px rgba(20,18,14,0.25);
+  }
+
+  *{ box-sizing: border-box; }
+  html, body{ margin:0; padding:0; }
+
+  body{
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 800px at 50% 30%, #1c1a17 0%, #0c0b09 60%, #050504 100%);
+    font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* film grain over background */
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    pointer-events:none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.45'/></svg>");
+    opacity: 0.25;
+    mix-blend-mode: overlay;
+    z-index: 1;
+  }
+
+  .stage{
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 56px 24px 96px;
+  }
+
+  /* -------- Card base -------- */
+  .card-wrap{
+    perspective: 2200px;
+    width: min(720px, 100%);
+  }
+
+  .card{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5 / 7;
+    transform-style: preserve-3d;
+    transition: transform 900ms cubic-bezier(.7,.05,.2,1);
+    will-change: transform;
+  }
+  .card.flipped{ transform: rotateY(180deg); }
+
+  .face{
+    position: absolute; inset: 0;
+    background: var(--paper);
+    color: var(--ink);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: opacity 0ms linear 450ms;
+  }
+  .face.back{ transform: rotateY(180deg); }
+
+  /* Belt-and-braces: also hide the inactive face via opacity at the midpoint
+     of the flip, in case overflow:hidden flattens the 3D context. */
+  .card:not(.flipped) .face.back{ opacity: 0; }
+  .card.flipped .face.front{ opacity: 0; }
+
+  /* paper texture: subtle vertical fibers + edge vignette */
+  .face::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.5), transparent 60%),
+      radial-gradient(120% 80% at 50% 100%, rgba(80,70,50,.18), transparent 55%),
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.012) 0 1px, transparent 1px 3px);
+    pointer-events:none;
+  }
+  .face::after{
+    content:"";
+    position:absolute; inset:0;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.04), inset 0 0 80px rgba(60,50,30,.10);
+    pointer-events:none;
+  }
+
+  /* -------- FRONT: the invitation letter -------- */
+  .front{
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  /* vertical INNER LIGHT rail */
+  .rail{
+    grid-column: 1; grid-row: 1 / span 3;
+    border-right: 1px solid var(--hairline);
+    display: flex; align-items: center; justify-content: center;
+    padding: 28px 0;
+    position: relative;
+    z-index: 2;
+  }
+  .rail span{
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    letter-spacing: 0.6em;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .head{
+    grid-column: 2; grid-row: 1;
+    padding: 22px 28px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    column-gap: 18px;
+    align-items: start;
+    position: relative;
+    z-index: 2;
+  }
+  .head .brand{
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+  }
+  .head .brand::after{ content:"."; }
+  .head .tag{
+    text-align: center;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    padding-top: 9px;
+    position: relative;
+  }
+  .head .tag::before{
+    content:"";
+    position: absolute; left: 50%; top: 0;
+    transform: translateX(-50%);
+    width: 70%; height: 1px; background: var(--rule);
+  }
+  .head .addr{
+    text-align: right;
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    padding-top: 9px;
+    position: relative;
+  }
+  .head .addr::before{
+    content:"";
+    position: absolute; right: 0; top: 0;
+    width: 78%; height: 1px; background: var(--rule);
+  }
+
+  .body{
+    grid-column: 2; grid-row: 2;
+    padding: 18px 28px 0;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .salutation{
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 2.6vw, 22px);
+    line-height: 1.3;
+    margin: 6px 0 14px;
+    color: var(--ink);
+  }
+  .salutation .name{
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.55em;
+    line-height: 1;
+    letter-spacing: 0.005em;
+    border-bottom: none;
+    padding: 0 2px;
+    color: var(--ink);
+    display: inline-block;
+    transform: translateY(0.05em);
+  }
+  .salutation .name::first-letter{
+    font-size: 1.18em;
+  }
+
+  .display{
+    font-family: "Archivo", sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 8.2vw, 78px);
+    line-height: 0.86;
+    letter-spacing: -0.02em;
+    margin: 4px 0 2px;
+    text-transform: uppercase;
+  }
+  .display .small{
+    display: block;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 0.18em;
+    letter-spacing: 0.6em;
+    margin-bottom: 12px;
+    color: var(--ink-soft);
+  }
+
+  .letter{
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: clamp(13.5px, 1.55vw, 15.5px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 18px 0 0;
+    max-width: 46ch;
+    text-wrap: pretty;
+  }
+  .letter p + p{ margin-top: 0.7em; }
+  .letter em{ font-style: italic; }
+
+  .meta{
+    margin-top: auto;
+    padding-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    border-top: 1px solid var(--hairline);
+  }
+  .meta .cell .k{
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .meta .cell .v{
+    font-family: "Archivo", sans-serif;
+    font-weight: 800;
+    font-size: clamp(15px, 2.1vw, 19px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .meta .cell .v small{
+    display: block;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+    color: var(--ink-soft);
+  }
+
+  .foot{
+    grid-column: 2; grid-row: 3;
+    padding: 14px 28px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    position: relative;
+    z-index: 2;
+  }
+  .foot .flip{
+    appearance: none;
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink);
+    padding: 8px 14px;
+    font: inherit;
+    cursor: pointer;
+    letter-spacing: 0.18em;
+    transition: background 200ms, color 200ms;
+  }
+  .foot .flip:hover{ background: var(--ink); color: var(--paper); }
+
+  /* IL seal in lower-right */
+  .seal{
+    position: absolute;
+    right: 18px; bottom: 60px;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    z-index: 3;
+    background: rgba(242,238,230,0.6);
+    backdrop-filter: blur(2px);
+  }
+  .seal .star{
+    position: absolute; top: 8px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    color: var(--ink);
+  }
+  .seal .il{
+    font-family: "Cormorant Garamond", serif;
+    font-size: 7.5px;
+    letter-spacing: 0.32em;
+    line-height: 1.15;
+    margin-top: 6px;
+  }
+
+  /* -------- BACK: programme + RSVP (editorial) -------- */
+  .back-grid{
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    padding: 26px 30px 22px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* small top eyebrow row */
+  .back-eye{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 14px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .back-eye .l{ text-align: left; }
+  .back-eye .r{ text-align: right; }
+  .back-eye .star{
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    color: var(--ink);
+    letter-spacing: 0;
+  }
+
+  /* big editorial title */
+  .back-title{
+    margin-top: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 18px;
+  }
+  .back-title h2{
+    margin: 0;
+    font-family: "Archivo", sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(28px, 5.4vw, 48px);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+  }
+  .back-title h2 em{
+    display: block;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.42em;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .back-title .stamp{
+    text-align: right;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+  .back-title .stamp b{
+    display: block;
+    font-family: "Archivo", sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin-top: 4px;
+  }
+
+  /* main body grid: programme on left, info stack on right */
+  .back-body{
+    padding-top: 16px;
+    display: grid;
+    grid-template-columns: 1.25fr 1px 0.95fr;
+    gap: 22px;
+    min-height: 0;
+  }
+  .back-divider{
+    background: var(--hairline);
+    width: 1px;
+    height: 100%;
+  }
+
+  .programme{ min-width: 0; }
+  .panel-h{
+    display: flex; align-items: center; gap: 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin: 0 0 12px;
+  }
+  .panel-h::before{
+    content: ""; width: 14px; height: 1px; background: var(--rule);
+  }
+
+  .programme ul{ list-style: none; margin:0; padding:0; }
+  .programme li{
+    display: grid;
+    grid-template-columns: 70px 14px 1fr;
+    gap: 10px;
+    padding: 9px 0;
+    align-items: baseline;
+    border-top: 1px solid var(--hairline);
+  }
+  .programme li:first-child{ border-top: none; padding-top: 2px; }
+  .programme .time{
+    font-family: "Archivo", sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .programme .time small{
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+    font-size: 8.5px;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .programme .dot{
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ink);
+    align-self: center;
+    margin-top: 0;
+  }
+  .programme .what{
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14.5px;
+    line-height: 1.35;
+  }
+  .programme .what b{
+    font-weight: 500;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .programme .what small{
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  /* right info stack */
+  .info{ display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .info .block{
+    display: flex; flex-direction: column;
+  }
+  .info .v{
+    font-family: "Archivo", sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .info .v em{
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.95em;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+  .info .sub{
+    font-family: "Cormorant Garamond", serif;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .info .sub b{
+    font-family: "Archivo", sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  /* rsvp ticket */
+  .rsvp-ticket{
+    margin-top: 4px;
+    padding: 12px 14px;
+    border: 1px solid var(--rule);
+    background: rgba(0,0,0,0.025);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    position: relative;
+  }
+  .rsvp-ticket::before,
+  .rsvp-ticket::after{
+    content: "";
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    top: 50%; transform: translateY(-50%);
+  }
+  .rsvp-ticket::before{ left: -6px; }
+  .rsvp-ticket::after{ right: -6px; }
+  .rsvp-ticket .rh{
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .rsvp-ticket .rby{
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .rsvp-ticket .rby b{
+    font-style: normal;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .rsvp-ticket .line{
+    font-family: "Archivo", sans-serif;
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+
+  .back-foot{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid var(--hairline);
+    padding-top: 12px;
+    margin-top: 14px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .back-foot .l{ text-align: left; }
+  .back-foot .c{
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .back-foot .r{ text-align: right; }
+  .back-foot .flip-link{
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    transition: color 200ms, border-color 200ms;
+    cursor: pointer;
+  }
+  .back-foot .flip-link:hover{
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  /* mobile */
+  @media (max-width: 600px){
+    .back-grid{ padding: 22px 22px 18px; }
+    .back-body{ grid-template-columns: 1fr; }
+    .back-divider{ display: none; }
+    .programme li{ grid-template-columns: 60px 10px 1fr; }
+  }
+
+  /* -------- Envelope -------- */
+  .envelope{
+    position: fixed; inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+  }
+  .envelope .scrim{
+    position: absolute; inset: 0;
+    background: radial-gradient(60% 50% at 50% 60%, rgba(0,0,0,0.0), rgba(0,0,0,0.55));
+    transition: opacity 700ms ease;
+  }
+  .envelope .env{
+    position: relative;
+    width: min(560px, 86vw);
+    aspect-ratio: 1.5 / 1;
+    background: #1a1814;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
+    transition: transform 800ms cubic-bezier(.7,.05,.2,1), opacity 600ms 300ms;
+    pointer-events: auto;
+  }
+  .envelope .flap{
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 100%;
+    background: linear-gradient(180deg, #1f1d18 0%, #14120f 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 66%);
+    transform-origin: top center;
+    transition: transform 900ms cubic-bezier(.7,.05,.2,1);
+    box-shadow: 0 6px 18px rgba(0,0,0,.4);
+  }
+  .envelope .seal-wax{
+    position: absolute;
+    left: 50%; top: 40%;
+    width: 56px; height: 56px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f2eee6 0%, #d9d2c2 60%, #b8af9c 100%);
+    color: #0A0A0A;
+    display: grid; place-items: center;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    box-shadow: 0 2px 6px rgba(0,0,0,.4), inset 0 -3px 8px rgba(0,0,0,.15);
+    z-index: 2;
+  }
+  .envelope .stamp-text{
+    position: absolute;
+    left: 50%; bottom: 14%;
+    transform: translateX(-50%);
+    color: rgba(242,238,230,.72);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .envelope .stamp-text .big{
+    display: block;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-size: 22px;
+    margin-bottom: 6px;
+    color: #f2eee6;
+  }
+  .envelope .open-cta{
+    position: absolute;
+    left: 50%; bottom: -52px;
+    transform: translateX(-50%);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: rgba(242,238,230,.7);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .envelope .env:hover .seal-wax{ transform: translate(-50%,-50%) scale(1.04); }
+
+  body.opened .envelope .flap{ transform: rotateX(-180deg); }
+  body.opened .envelope .env{ transform: translateY(40vh) scale(.6); opacity: 0; }
+  body.opened .envelope{ pointer-events: none; }
+  body.opened .envelope .scrim{ opacity: 0; }
+
+  /* card entry */
+  .card-wrap{ opacity: 0; transform: translateY(20px); transition: opacity 600ms 700ms ease, transform 700ms 700ms cubic-bezier(.2,.7,.2,1); }
+  body.opened .card-wrap{ opacity: 1; transform: none; }
+
+  /* tweaks panel position adjustment */
+  .tp-panel{ z-index: 80 !important; }
+
+  @media (max-width: 600px){
+    .head{ padding: 18px 18px 10px; column-gap: 10px; }
+    .body{ padding: 14px 18px 0; }
+    .foot{ padding: 12px 18px 14px; }
+    .meta{ grid-template-columns: 1fr 1fr; }
+    .meta .cell:last-child{ grid-column: span 2; }
+    .seal{ width: 48px; height: 48px; right: 14px; bottom: 56px; }
+  }
+
+  /* paper variants (driven by tweak) */
+  body[data-paper="ivory"]{ --paper:#F2EEE6; --paper-edge:#E6E0D3; }
+  body[data-paper="bone"]{ --paper:#EDE7DA; --paper-edge:#DDD4C0; }
+  body[data-paper="snow"]{ --paper:#F7F5F0; --paper-edge:#E8E5DC; }
+  body[data-paper="charcoal"]{ --paper:#0E0D0B; --paper-edge:#1a1814; --ink:#F2EEE6; --ink-soft:#C9C3B4; --rule:rgba(242,238,230,0.55); --hairline:rgba(242,238,230,0.18); }
+  body[data-paper="charcoal"] .seal{ background: rgba(14,13,11,0.6); }
+  body[data-paper="charcoal"] .seal-wax{ background: radial-gradient(circle at 35% 30%, #2a2722 0%, #1a1814 70%); color:#F2EEE6; }
+</style>
+</head>
+<body data-paper="ivory">
+
+  <!-- ENVELOPE -->
+  <div class="envelope" id="envelope" aria-hidden="false">
+    <div class="scrim"></div>
+    <div class="env" id="env" role="button" tabindex="0" aria-label="Open the invitation">
+      <div class="flap"></div>
+      <div class="seal-wax">IL</div>
+      <div class="stamp-text">
+        <span class="big">For you,</span>
+        <span id="env-name">a friend of Runway 26</span>
+      </div>
+      <div class="open-cta">Click the seal to open</div>
+    </div>
+  </div>
+
+  <!-- CARD STAGE -->
+  <main class="stage">
+    <div class="card-wrap">
+      <div class="card" id="card">
+
+        <!-- FRONT -->
+        <section class="face front" aria-label="Invitation front">
+          <aside class="rail"><span>Inner Light Unveiled</span></aside>
+
+          <header class="head">
+            <div class="brand">RUNWAY 26</div>
+            <div class="tag">Walk in your own light.</div>
+            <div class="addr">27 Bukit Manis Rd, 099892<br/>Singapore, Sentosa Golf Club</div>
+          </header>
+
+          <div class="body">
+            <p class="salutation" id="salutation">
+              To the<br/><span class="name" id="recipient">Friends of Inner Light</span>,
+            </p>
+
+            <h1 class="display">
+              <span class="small">An invitation to</span>
+              Inner Light<br/>Unveiled
+            </h1>
+
+            <div class="letter" id="letter">
+              <p><em>Inner Light Unveiled</em> is Inner Light's student showcase and runway event, created as a platform for our students to present their growth, confidence, and individuality on stage.</p>
+              <p>The event will be held at Sentosa Golf Club on 16 May, featuring both children and adult runway segments. Through professional styling, makeup, photography, videography, and a live showcase experience, students will have the opportunity to apply what they have learned in class and confidently express themselves in front of an audience.</p>
+              <p>It is not just a fashion show, but a celebration of self-expression, transformation, and the courage to step into the spotlight.</p>
+            </div>
+
+            <div class="meta">
+              <div class="cell">
+                <div class="k">Date</div>
+                <div class="v">May 16<small>Saturday, 2026</small></div>
+              </div>
+              <div class="cell">
+                <div class="k">Hours</div>
+                <div class="v">4 PM<small>Doors open at 3 PM</small></div>
+              </div>
+              <div class="cell">
+                <div class="k">Place</div>
+                <div class="v">Sentosa<small>Golf Club, Singapore</small></div>
+              </div>
+            </div>
+          </div>
+
+          <footer class="foot">
+            <span>No. 026 / Private viewing</span>
+            <button class="flip" id="flipBtn" type="button">Programme & RSVP →</button>
+          </footer>
+
+          <div class="seal" aria-hidden="true">
+            <span class="star">✦</span>
+            <span class="il">INNER<br/>LIGHT</span>
+          </div>
+        </section>
+
+        <!-- BACK -->
+        <section class="face back" aria-label="Programme and RSVP">
+          <div class="back-grid">
+
+            <div class="back-eye">
+              <div class="l">No. 026 / Spring 2026</div>
+              <div class="star">✦</div>
+              <div class="r">Sentosa · Singapore</div>
+            </div>
+
+            <div class="back-title">
+              <h2>
+                <em>The afternoon</em>
+                Programme<br/>& RSVP
+              </h2>
+              <div class="stamp">
+                Saturday<br/>
+                <b>16 May 2026</b>
+              </div>
+            </div>
+
+            <div class="back-body">
+              <div class="programme">
+                <h4 class="panel-h">Programme</h4>
+                <ul>
+                  <li>
+                    <span class="time">3:00<small>PM</small></span>
+                    <span class="dot"></span>
+                    <span class="what"><b>Doors open</b><small>Arrival</small></span>
+                  </li>
+                  <li>
+                    <span class="time">4:00<small>PM</small></span>
+                    <span class="dot"></span>
+                    <span class="what"><b>The runway</b><small>Inner Light Unveiled</small></span>
+                  </li>
+                  <li>
+                    <span class="time">5:00<small>PM</small></span>
+                    <span class="dot"></span>
+                    <span class="what"><b>Refreshments & networking</b><small>Photographs and conversation</small></span>
+                  </li>
+                  <li>
+                    <span class="time">6:00<small>PM</small></span>
+                    <span class="dot"></span>
+                    <span class="what"><b>Close</b><small>Thank you for walking with us</small></span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="back-divider" aria-hidden="true"></div>
+
+              <div class="info">
+                <div class="block">
+                  <h4 class="panel-h">Dress</h4>
+                  <div class="v">Smart casual</div>
+                  <div class="sub"><em>A touch of light, encouraged.</em></div>
+                </div>
+
+                <div class="block">
+                  <h4 class="panel-h">Venue</h4>
+                  <div class="v">Sentosa Golf Club</div>
+                  <div class="sub">27 Bukit Manis Road<br/>Singapore 099892</div>
+                </div>
+
+                <div class="block">
+                  <h4 class="panel-h">RSVP</h4>
+                  <div class="rsvp-ticket">
+                    <div class="rh">Kindly respond</div>
+                    <div class="rby">by <b>9 May 2026</b></div>
+                    <div class="line"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781116161d0a14111f100c0b0c0d1c11174a484a4c381f15191114561b1715">[email&#160;protected]</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="back-foot">
+              <div class="l">Non-transferable</div>
+              <div class="c"><em>Walk in your own light.</em></div>
+              <div class="r"><a href="#" class="flip-link" id="flipBack">← Back to letter</a></div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- React + Babel for tweaks panel -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+
+  <!-- Plain interactivity for envelope + flip -->
+  <script>
+    window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "recipient": "Friends of Inner Light",
+      "paper": "ivory",
+      "envelope": true,
+      "letterTone": "warm",
+      "showSeal": true
+    }/*EDITMODE-END*/;
+    const TWEAK_DEFAULTS = window.TWEAK_DEFAULTS;
+
+    const env = document.getElementById('env');
+    const envelope = document.getElementById('envelope');
+    const card = document.getElementById('card');
+    const flipBtn = document.getElementById('flipBtn');
+    const flipBack = document.getElementById('flipBack');
+
+    function openEnvelope(){
+      document.body.classList.add('opened');
+      setTimeout(()=>{ envelope.style.display = 'none'; }, 1200);
+    }
+    env.addEventListener('click', openEnvelope);
+    env.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openEnvelope(); }});
+
+    flipBtn.addEventListener('click', ()=> card.classList.toggle('flipped'));
+    flipBack.addEventListener('click', (e)=>{ e.preventDefault(); card.classList.toggle('flipped'); });
+
+    // Apply TWEAK_DEFAULTS to DOM at boot
+    function applyTweaks(t){
+      document.body.dataset.paper = t.paper || 'ivory';
+      const recip = document.getElementById('recipient');
+      const envName = document.getElementById('env-name');
+      const fallback = 'Friends of Inner Light';
+      if(recip) recip.textContent = t.recipient || fallback;
+      if(envName) envName.textContent = t.recipient || fallback;
+
+      const seal = document.querySelector('.front .seal');
+      if(seal) seal.style.display = t.showSeal ? '' : 'none';
+
+      const letter = document.getElementById('letter');
+      if(letter){
+        if(t.letterTone === 'formal'){
+          letter.innerHTML = `
+            <p>You are cordially invited to the unveiling of Runway 26's spring collection. An intimate presentation of the new season at Sentosa Golf Club.</p>
+            <p>The afternoon will include a runway, a private viewing of the pieces, and refreshments with the designer. <em>Your presence would be a quiet honour.</em></p>`;
+        } else if(t.letterTone === 'playful'){
+          letter.innerHTML = `
+            <p>Pull on something you love. Bring the friend who tells you the truth about hemlines. We are showing the new season quietly, beautifully, and only to a few.</p>
+            <p>Champagne, a runway, the collection up close, and a long afternoon of light. <em>Stay as long as the sun does.</em></p>`;
+        } else {
+          letter.innerHTML = `
+            <p><em>Inner Light Unveiled</em> is Inner Light's student showcase and runway event, created as a platform for our students to present their growth, confidence, and individuality on stage.</p>
+            <p>The event will be held at Sentosa Golf Club on 16 May, featuring both children and adult runway segments. Through professional styling, makeup, photography, videography, and a live showcase experience, students will have the opportunity to apply what they have learned in class and confidently express themselves in front of an audience.</p>
+            <p>It is not just a fashion show, but a celebration of self-expression, transformation, and the courage to step into the spotlight.</p>`;
+        }
+      }
+
+      // envelope skip
+      if(!t.envelope){
+        document.body.classList.add('opened');
+        envelope.style.display='none';
+      }
+    }
+    applyTweaks(TWEAK_DEFAULTS);
+    window.__applyTweaks = applyTweaks;
+  </script>
+
+  <!-- Tweaks UI -->
+  <script type="text/babel">
+    const { useTweaks, TweaksPanel, TweakSection, TweakText, TweakRadio, TweakToggle } = window;
+
+    function App(){
+      const [t, setTweak] = useTweaks(window.TWEAK_DEFAULTS);
+      React.useEffect(()=>{ if(window.__applyTweaks) window.__applyTweaks(t); }, [t]);
+      return (
+        <TweaksPanel title="Tweaks">
+          <TweakSection label="Recipient" />
+          <TweakText label="Name on envelope & letter"
+            value={t.recipient}
+            placeholder="Friends of Inner Light"
+            onChange={(v)=>setTweak('recipient', v || 'Friends of Inner Light')} />
+
+          <TweakSection label="Paper" />
+          <TweakRadio label="Stock"
+            value={t.paper}
+            options={['ivory', 'bone', 'snow', 'charcoal']}
+            onChange={(v)=>setTweak('paper', v)} />
+
+          <TweakSection label="Letter tone" />
+          <TweakRadio label="Voice"
+            value={t.letterTone}
+            options={['warm', 'formal', 'playful']}
+            onChange={(v)=>setTweak('letterTone', v)} />
+
+          <TweakSection label="Presentation" />
+          <TweakToggle label="Envelope intro"
+            value={t.envelope}
+            onChange={(v)=>setTweak('envelope', v)} />
+          <TweakToggle label="Show IL seal"
+            value={t.showSeal}
+            onChange={(v)=>setTweak('showSeal', v)} />
+        </TweaksPanel>
+      );
+    }
+
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+    ReactDOM.createRoot(root).render(<App/>);
+  </script>
+
+</body>
+</html>
