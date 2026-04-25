@@ -621,12 +621,225 @@
     border-color: var(--ink);
   }
 
-  /* mobile */
+  /* -------- RESPONSIVE MOBILE STYLES -------- */
+
+  /* Tablet and smaller (768px and below) */
+  @media (max-width: 768px){
+    .stage{ padding: 40px 16px 60px; }
+
+    .back-title h2{ font-size: clamp(24px, 5vw, 40px); }
+    .back-title{ gap: 12px; }
+    .back-title .stamp{ font-size: 8px; }
+    .back-title .stamp b{ font-size: 11px; }
+  }
+
+  /* Mobile (600px and below) */
   @media (max-width: 600px){
-    .back-grid{ padding: 22px 22px 18px; }
-    .back-body{ grid-template-columns: 1fr; }
+    .stage{ padding: 24px 12px 48px; }
+
+    /* Card must expand to fit content on mobile */
+    .card{ aspect-ratio: auto; min-height: auto; }
+    .face{
+      position: relative;
+      overflow: visible;
+    }
+    .face.back{
+      position: absolute;
+      inset: 0;
+      overflow: auto;
+    }
+    .card.flipped .face.front{ display: none; }
+    .card.flipped .face.back{
+      position: relative;
+      opacity: 1;
+    }
+    .card:not(.flipped) .face.back{ display: none; }
+
+    /* Front face adjustments */
+    .front{ grid-template-columns: 32px 1fr; }
+    .rail{ padding: 20px 0; }
+    .rail span{ font-size: 9px; letter-spacing: 0.4em; }
+
+    .head{
+      padding: 14px 14px 10px;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .head .brand{ font-size: 12px; }
+    .head .tag{
+      text-align: left;
+      padding-top: 6px;
+      font-size: 9px;
+    }
+    .head .tag::before{ display: none; }
+    .head .addr{
+      text-align: left;
+      padding-top: 6px;
+      font-size: 9px;
+    }
+    .head .addr::before{ display: none; }
+
+    .body{
+      padding: 10px 14px 14px;
+      flex: 1 1 auto;
+      overflow: visible;
+    }
+    .salutation{ font-size: 16px; margin: 4px 0 10px; }
+    .salutation .name{ font-size: 1.4em; }
+
+    .display{ font-size: clamp(32px, 10vw, 50px); margin: 2px 0; }
+    .display .small{ font-size: 0.16em; letter-spacing: 0.4em; margin-bottom: 8px; }
+
+    .letter{ font-size: 12.5px; margin-top: 12px; max-width: 100%; }
+
+    .meta{
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding-top: 12px;
+    }
+    .meta .cell:last-child{ grid-column: span 2; }
+    .meta .cell .k{ font-size: 8px; }
+    .meta .cell .v{ font-size: 14px; }
+    .meta .cell .v small{ font-size: 10px; margin-top: 4px; }
+
+    .foot{
+      padding: 10px 14px 12px;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .foot span{ font-size: 8px; }
+    .foot .flip{
+      width: 100%;
+      text-align: center;
+      padding: 12px 14px;
+      font-size: 9px;
+    }
+
+    .seal{ width: 42px; height: 42px; right: 10px; bottom: 50px; }
+    .seal .star{ font-size: 7px; top: 6px; }
+    .seal .il{ font-size: 6px; letter-spacing: 0.25em; }
+
+    /* Back face adjustments */
+    .back-grid{
+      padding: 18px 16px 20px;
+      height: auto;
+      min-height: 100%;
+      grid-template-rows: auto auto auto auto;
+    }
+    .back-eye{ font-size: 7px; gap: 8px; }
+    .back-eye .star{ font-size: 12px; }
+
+    .back-title{
+      margin-top: 10px;
+      padding-bottom: 10px;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .back-title h2{ font-size: clamp(22px, 7vw, 32px); }
+    .back-title h2 em{ font-size: 0.38em; margin-bottom: 4px; }
+    .back-title .stamp{ text-align: left; margin-top: 4px; }
+
+    .back-body{
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding-top: 12px;
+    }
     .back-divider{ display: none; }
-    .programme li{ grid-template-columns: 60px 10px 1fr; }
+
+    .panel-h{ font-size: 8px; margin-bottom: 8px; }
+
+    .programme li{
+      grid-template-columns: 55px 8px 1fr;
+      gap: 6px;
+      padding: 7px 0;
+    }
+    .programme .time{ font-size: 13px; }
+    .programme .time small{ font-size: 7px; }
+    .programme .dot{ width: 5px; height: 5px; }
+    .programme .what{ font-size: 12.5px; }
+    .programme .what small{ font-size: 7px; }
+
+    .info{ gap: 12px; }
+    .info .v{ font-size: 14px; }
+    .info .sub{ font-size: 11px; }
+
+    .rsvp-ticket{ padding: 10px 12px; }
+    .rsvp-ticket .rh{ font-size: 7px; }
+    .rsvp-ticket .rby{ font-size: 11px; }
+    .rsvp-ticket .line{ font-size: 11px; }
+
+    .back-foot{
+      grid-template-columns: 1fr;
+      gap: 8px;
+      text-align: center;
+      padding-top: 10px;
+      margin-top: 10px;
+      font-size: 8px;
+    }
+    .back-foot .l, .back-foot .r{ text-align: center; }
+    .back-foot .c{ font-size: 11px; }
+    .back-foot .flip-link{ font-size: 8px; }
+
+    /* Envelope adjustments */
+    .envelope .env{ width: min(320px, 90vw); }
+    .envelope .seal-wax{ width: 48px; height: 48px; font-size: 10px; }
+    .envelope .stamp-text{ font-size: 8px; bottom: 12%; }
+    .envelope .stamp-text .big{ font-size: 18px; }
+    .envelope .open-cta{ font-size: 8px; letter-spacing: 0.25em; bottom: -44px; }
+  }
+
+  /* Extra small mobile (400px and below) */
+  @media (max-width: 400px){
+    .stage{ padding: 16px 8px 32px; }
+
+    .front{ grid-template-columns: 24px 1fr; }
+    .rail span{ font-size: 8px; letter-spacing: 0.3em; }
+
+    .head{ padding: 10px 10px 8px; }
+    .body{ padding: 8px 10px 12px; }
+    .foot{ padding: 8px 10px 10px; }
+
+    .display{ font-size: clamp(26px, 11vw, 40px); }
+    .display .small{ font-size: 0.14em; letter-spacing: 0.3em; }
+
+    .letter{ font-size: 11.5px; line-height: 1.5; }
+
+    .meta{ gap: 6px; }
+    .meta .cell .v{ font-size: 13px; }
+
+    .seal{ display: none; }
+
+    .back-grid{ padding: 12px 10px 16px; }
+    .back-title h2{ font-size: 20px; }
+
+    .programme li{ grid-template-columns: 48px 6px 1fr; gap: 4px; }
+    .programme .time{ font-size: 12px; }
+    .programme .what{ font-size: 11.5px; }
+
+    .envelope .env{ width: min(280px, 92vw); }
+    .envelope .seal-wax{ width: 42px; height: 42px; font-size: 9px; }
+    .envelope .stamp-text .big{ font-size: 16px; }
+  }
+
+  /* Landscape mobile orientation */
+  @media (max-height: 500px) and (orientation: landscape){
+    .stage{ padding: 16px 24px; }
+    .card-wrap{ width: min(500px, 90vw); }
+    .card{ aspect-ratio: auto; min-height: auto; }
+    .face{ position: relative; overflow: visible; }
+    .face.back{ position: absolute; inset: 0; overflow: auto; }
+    .card.flipped .face.front{ display: none; }
+    .card.flipped .face.back{ position: relative; opacity: 1; }
+    .card:not(.flipped) .face.back{ display: none; }
+    .envelope .env{ width: min(400px, 70vw); aspect-ratio: 2 / 1; }
+  }
+
+  /* Touch-friendly tap targets */
+  @media (hover: none) and (pointer: coarse){
+    .foot .flip{ min-height: 44px; }
+    .back-foot .flip-link{ padding: 8px 0; display: inline-block; }
+    .envelope .env{ cursor: pointer; }
   }
 
   /* -------- Envelope -------- */
@@ -723,15 +936,6 @@
   /* tweaks panel position adjustment */
   .tp-panel{ z-index: 80 !important; }
 
-  @media (max-width: 600px){
-    .head{ padding: 18px 18px 10px; column-gap: 10px; }
-    .body{ padding: 14px 18px 0; }
-    .foot{ padding: 12px 18px 14px; }
-    .meta{ grid-template-columns: 1fr 1fr; }
-    .meta .cell:last-child{ grid-column: span 2; }
-    .seal{ width: 48px; height: 48px; right: 14px; bottom: 56px; }
-  }
-
   /* paper variants (driven by tweak) */
   body[data-paper="ivory"]{ --paper:#F2EEE6; --paper-edge:#E6E0D3; }
   body[data-paper="bone"]{ --paper:#EDE7DA; --paper-edge:#DDD4C0; }
@@ -783,9 +987,8 @@
             </h1>
 
             <div class="letter" id="letter">
-              <p><em>Inner Light Unveiled</em> is Inner Light's student showcase and runway event, created as a platform for our students to present their growth, confidence, and individuality on stage.</p>
-              <p>The event will be held at Sentosa Golf Club on 16 May, featuring both children and adult runway segments. Through professional styling, makeup, photography, videography, and a live showcase experience, students will have the opportunity to apply what they have learned in class and confidently express themselves in front of an audience.</p>
-              <p>It is not just a fashion show, but a celebration of self-expression, transformation, and the courage to step into the spotlight.</p>
+              <p>You are warmly invited to witness our students step into the spotlight at <em>Inner Light Unveiled</em>, a celebration of confidence, self-expression, and the courage to shine.</p>
+              <p>Join us for an afternoon of runway, refreshments, and transformation at Sentosa Golf Club.</p>
             </div>
 
             <div class="meta">
@@ -951,17 +1154,16 @@
       if(letter){
         if(t.letterTone === 'formal'){
           letter.innerHTML = `
-            <p>You are cordially invited to the unveiling of Runway 26's spring collection. An intimate presentation of the new season at Sentosa Golf Club.</p>
-            <p>The afternoon will include a runway, a private viewing of the pieces, and refreshments with the designer. <em>Your presence would be a quiet honour.</em></p>`;
+            <p>You are cordially invited to attend <em>Inner Light Unveiled</em>, an exclusive showcase of poise and personal transformation.</p>
+            <p>The afternoon will feature a runway presentation and refreshments. <em>Your presence would be an honour.</em></p>`;
         } else if(t.letterTone === 'playful'){
           letter.innerHTML = `
-            <p>Pull on something you love. Bring the friend who tells you the truth about hemlines. We are showing the new season quietly, beautifully, and only to a few.</p>
-            <p>Champagne, a runway, the collection up close, and a long afternoon of light. <em>Stay as long as the sun does.</em></p>`;
+            <p>Come see our students own the spotlight! <em>Inner Light Unveiled</em> is where confidence meets the catwalk.</p>
+            <p>Expect a runway, good company, and an afternoon you won't forget. <em>We saved you a seat.</em></p>`;
         } else {
           letter.innerHTML = `
-            <p><em>Inner Light Unveiled</em> is Inner Light's student showcase and runway event, created as a platform for our students to present their growth, confidence, and individuality on stage.</p>
-            <p>The event will be held at Sentosa Golf Club on 16 May, featuring both children and adult runway segments. Through professional styling, makeup, photography, videography, and a live showcase experience, students will have the opportunity to apply what they have learned in class and confidently express themselves in front of an audience.</p>
-            <p>It is not just a fashion show, but a celebration of self-expression, transformation, and the courage to step into the spotlight.</p>`;
+            <p>You are warmly invited to witness our students step into the spotlight at <em>Inner Light Unveiled</em>, a celebration of confidence, self-expression, and the courage to shine.</p>
+            <p>Join us for an afternoon of runway, refreshments, and transformation at Sentosa Golf Club.</p>`;
         }
       }
 
